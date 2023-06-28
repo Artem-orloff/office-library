@@ -1,4 +1,4 @@
-package com.example.officelibrary.repository;
+package model;
 
 import jakarta.persistence.*;
 
@@ -25,5 +25,6 @@ public class User {
     private String typeuser;
 
     public void setId(int id) {
+        this.id = id;
     }
 }

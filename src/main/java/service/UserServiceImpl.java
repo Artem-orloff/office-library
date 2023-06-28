@@ -1,6 +1,6 @@
-package com.example.officelibrary.repository;
+package service;
 
-import com.example.officelibrary.repository.User;
+import model.User;
 import com.example.officelibrary.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +19,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAll() {
+        return null;
+    }
+
+    @Override
     public List<User>  readAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public User read(int author_id) {
-        int user_id = 0;
-        return (User) UserRepository.getOne(user_id);
+    public User read(long id) {
+        return (User) UserRepository.getOne(id);
     }
 
     @Override

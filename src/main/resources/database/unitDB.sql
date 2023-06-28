@@ -1,26 +1,29 @@
 CREATE TABLE users
 (
-    id serial PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     second_name VARCHAR(50) NULL,
     birthdate VARCHAR(50) NOT NULL,
     type_user VARCHAR(50) NOT NULL
 )
+CREATE SEQUENCE users_id_seq START WITH 4 INCREMENT BY 1;
 
 CREATE TABLE book
 (
-    id serial PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     birthdate VARCHAR(50) NOT NULL,
     type VARCHAR(50) NOT NULL
 )
+CREATE SEQUENCE book_id_seq START WITH 4 INCREMENT BY 1;
 
 CREATE TABLE author
 (
-    id serial PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     second_name VARCHAR(50) NULL,
     birthdate VARCHAR(50) NOT NULL,
     biogrphi VARCHAR(200) NOT NULL
-    )
+)
+CREATE SEQUENCE author_id_seq START WITH 4 INCREMENT BY 1;
 
