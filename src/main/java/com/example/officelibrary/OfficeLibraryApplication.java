@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OfficeLibraryApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(OfficeLibraryApplication.class, args);
 	}
 

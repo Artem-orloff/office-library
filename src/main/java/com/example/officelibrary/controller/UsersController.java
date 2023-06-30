@@ -1,24 +1,24 @@
-package controller;
+package com.example.officelibrary.controller;
 
-import model.User;
+import com.example.officelibrary.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.UserService;
+import com.example.officelibrary.service.UserService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/library")
-public class UserController {
+@RequestMapping("/office-library")
+public class UsersController {
     @Autowired
     UserService userService;
 
-    @GetMapping
+    @GetMapping("/users")
     public ResponseEntity<?> getAllUsers(){
-        List<User> user = userService.findAll();
-        return ResponseEntity.ok().body(user);
+        List<Users> users = userService.findAll();
+        return ResponseEntity.ok().body(users);
     }
 }
