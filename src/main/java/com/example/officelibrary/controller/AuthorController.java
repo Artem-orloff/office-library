@@ -20,7 +20,7 @@ public class AuthorController {
     @Autowired
     AuthorService authorService;
 
-    @GetMapping("/author")
+    @GetMapping("/authors")
     public ResponseEntity<?> getAllAuthors(){
         List<Author> authors = authorService.findAll();
         return ResponseEntity.ok().body(authors);

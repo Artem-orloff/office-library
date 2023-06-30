@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class Book {
 
     @Id
+//    @ManyToOne()
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
@@ -21,6 +22,8 @@ public class Book {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "readerid")
+    private Long readerId;
 
 //    @ManyToOne
 //    @JoinColumn(name = "Id", nullable = false)
@@ -56,6 +59,14 @@ public class Book {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Long getReaderId() {
+        return readerId;
+    }
+
+    public void setReaderId(Long readerId) {
+        this.readerId = readerId;
     }
 
     @Override

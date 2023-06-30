@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class Author {
 
     @Id
+//    @OneToMany(mappedBy = "book")
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
@@ -72,7 +73,7 @@ public class Author {
                 ", first_name" + firstName +
                 ", second_name" + secondName + '\'' +
                 ", birthdate" + birthdate + '\'' +
-                ", biographi" + biography +'\'' +
+                ", biography" + biography +'\'' +
                 '}';
     }
 
