@@ -3,12 +3,13 @@ package com.example.officelibrary.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "author")
 public class Author {
 
     @Id
-//    @OneToMany(mappedBy = "book")
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
@@ -25,6 +26,8 @@ public class Author {
     @Column(name = "biographi")
     private String biography;
 
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Book> books;
 
     public Long getId() {
         return Id;

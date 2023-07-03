@@ -1,14 +1,16 @@
 package com.example.officelibrary.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "book")
 public class Book {
 
     @Id
-//    @ManyToOne()
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
@@ -22,12 +24,14 @@ public class Book {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "readerid")
-    private Long readerId;
+    @Column(name = "author_id")
+    private Long author_id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "Id", nullable = false)
-//    private Author author;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "author_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Author author;
 
     public Long getId() {
         return bookId;
@@ -61,12 +65,12 @@ public class Book {
         this.type = type;
     }
 
-    public Long getReaderId() {
-        return readerId;
+    public Long getAuthor_Id() {
+        return author_id;
     }
 
-    public void setReaderId(Long readerId) {
-        this.readerId = readerId;
+    public void setAuthor_Id(Long readerId) {
+        this.author_id = author_id;
     }
 
     @Override
