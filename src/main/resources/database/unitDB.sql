@@ -14,7 +14,7 @@ CREATE TABLE book
     name VARCHAR(50) NOT NULL,
     birthdate VARCHAR(50) NOT NULL,
     type VARCHAR(50) NOT NULL,
-    author_id VARCHAR(50) NULL
+    author_id BIGINT NULL
 )
 CREATE SEQUENCE book_id_seq START WITH 4 INCREMENT BY 1;
 

@@ -24,13 +24,13 @@ public class Book {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "author_id")
-    private Long author_id;
+    @OneToOne(mappedBy = "book")
+    private Users users;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "author_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIgnore(value = true)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     public Long getId() {
@@ -65,12 +65,12 @@ public class Book {
         this.type = type;
     }
 
-    public Long getAuthor_Id() {
-        return author_id;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthor_Id(Long readerId) {
-        this.author_id = author_id;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override

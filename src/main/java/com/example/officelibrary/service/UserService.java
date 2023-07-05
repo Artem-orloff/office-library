@@ -11,9 +11,13 @@ public interface UserService {
     Optional<Users> findById(long userid);
     Users read(long userid);
 
+    boolean delete(long userid);
+
+    boolean deleteById(long userid);
+
     boolean update(Users users, long userid);
 
-    boolean delete(Long userid);
+    boolean deleteById(Long userid);
 
 
 }

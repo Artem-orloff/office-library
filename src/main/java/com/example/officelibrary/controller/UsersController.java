@@ -3,6 +3,7 @@ package com.example.officelibrary.controller;
 import com.example.officelibrary.exception.ResourceNotFoundException;
 import com.example.officelibrary.model.Users;
 import com.example.officelibrary.repository.UsersRepository;
+import com.example.officelibrary.service.UserServiceImpl;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -17,6 +18,8 @@ import com.example.officelibrary.service.UserService;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @RestController
 @RequestMapping("/office-library")
 public class UsersController {
@@ -30,14 +33,15 @@ public class UsersController {
     }
     @GetMapping("/user")
     public ResponseEntity<?> findUser(){
-        List<Users> users = userService.findAll();//нужно сделать!!!
+        List<Users> users = userService.findAll();
         return ResponseEntity.ok().body(users);
     }
-
+//
 //    @GetMapping("/del")
 //    public void deleteUser(Long userId){
-//        UsersRepository.deleteById(Long id);
+//        UserServiceImpl.deleteById(id);
 //    }
+
     @GetMapping("/user/{id}")
     public ResponseEntity<Optional<Users>> getUserById(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {

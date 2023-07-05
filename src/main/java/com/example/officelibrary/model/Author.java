@@ -3,6 +3,7 @@ package com.example.officelibrary.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,8 +27,8 @@ public class Author {
     @Column(name = "biographi")
     private String biography;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Book> books;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
+    private List<Book> books = new ArrayList<>();
 
     public Long getId() {
         return Id;

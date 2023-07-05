@@ -1,7 +1,11 @@
 package com.example.officelibrary.model;
 
 import jakarta.persistence.*;
+import org.apache.tomcat.util.digester.Rule;
+import org.springframework.context.annotation.EnableMBeanExport;
+import org.springframework.context.annotation.Role;
 
+import java.util.HashSet;
 
 
 @Entity
@@ -11,6 +15,10 @@ public class Users {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "id"))
+//    @Enumerated(EnumType.STRING)
+//    private Set<Role> roles = new HashSet<>();
 
     @Column(name = "first_name")
     private String firstName;
@@ -23,6 +31,10 @@ public class Users {
 
     @Column(name = "type_user")
     private String typeUser;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private Book book;
 
     public long getUserId() {
         return userId;
@@ -64,6 +76,14 @@ public class Users {
         this.typeUser = typeuser;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -74,4 +94,6 @@ public class Users {
                 ", typeuser" + typeUser + '\'' +
                 '}';
     }
+//
+//    @Override
 }
