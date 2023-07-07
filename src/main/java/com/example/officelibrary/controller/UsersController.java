@@ -27,14 +27,14 @@ public class UsersController {
         List<User> users = userService.findAll();
         return ResponseEntity.ok().body(users);
     }
-    @GetMapping("/{user_id}/take/{book_id}")
-    public ResponseEntity<?> takeBook(@PathVariable(value = "user_id") Long userId, @PathVariable(value = "book_id") Long bookId) {
-        User user = userService.getById(userId);
-        Book book = bookService.getById(bookId);
-        if(user.getType() == Role.READER) {
-            System.out.println("Correct");
-        }
-        else { System.out.println("Incorrect");}
-        return ResponseEntity.ok().build();
-    }
+//    @GetMapping("/{user_id}/take/{book_id}")
+//    public ResponseEntity<?> takeBook(@PathVariable(value = "user_id") Long userId, @PathVariable(value = "book_id") Long bookId) {
+//        User user = userService.getById(userId);
+//        Book book = bookService.getById(bookId);
+//        if(user.getType() == Role.READER) {
+//            System.out.println("Correct");
+//        }
+//        else { System.out.println("Incorrect");}
+//        return ResponseEntity.ok().build();
+//    }
 }
