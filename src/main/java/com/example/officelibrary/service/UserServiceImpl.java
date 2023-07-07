@@ -1,15 +1,11 @@
 package com.example.officelibrary.service;
 
-import com.example.officelibrary.model.Users;
+import com.example.officelibrary.model.User;
 import com.example.officelibrary.repository.UsersRepository;
-import jakarta.persistence.metamodel.SingularAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,48 +14,35 @@ public class UserServiceImpl implements UserService {
     private UsersRepository usersRepository;
 
     @Override
-    public void create(Users users) {
+    public void create(User users) {
 
         usersRepository.save(users);
     }
 
     @Override
-    public List<Users> findAll() {
+    public List<User> findAll() {
+
         return usersRepository.findAll();
     }
 
     @Override
-    public Optional<Users> findById(long userid){
-        return usersRepository.findById(userid);
+    public User getById(long userId){
+//            return null;
+        return usersRepository.getById(userId);
     }
 
     @Override
-    public Users read(long userid) {
-        return usersRepository.getOne(userid);
+    public User read(long userId) {
+        return usersRepository.getOne(userId);
     }
 
     @Override
-    public boolean delete(long userid) {
+    public boolean delete(long userId) {
         return false;
     }
 
     @Override
-    public boolean deleteById(long userid) {
-        return false;
-    }
-
-
-//    @Override
-//    public boolean deleteById(long userid) {
-//        if (usersRepository.existsById(userid)) {
-//            usersRepository.deleteById(userid);
-//            return true;
-//        }
-//        return false;
-//    }
-
-    @Override
-    public boolean update(Users users, long userId){
+    public boolean update(User users, long userId){
         if (usersRepository.existsById(userId)){
             users.setUserId(userId);
             usersRepository.save(users);
@@ -68,9 +51,5 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    @Override
-    public boolean deleteById(Long userid) {
-        return false;
-    }
 
 }

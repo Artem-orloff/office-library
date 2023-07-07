@@ -30,6 +30,12 @@ public class Author {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private List<Book> books = new ArrayList<>();
 
+    public Author(String firstName, String birthdate, String biography){
+        this.firstName = firstName;
+        this.birthdate = birthdate;
+        this.biography = biography;
+    }
+
     public Long getId() {
         return Id;
     }

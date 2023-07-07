@@ -25,7 +25,7 @@ public class Book {
     private String type;
 
     @OneToOne(mappedBy = "book")
-    private Users users;
+    private User users;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)

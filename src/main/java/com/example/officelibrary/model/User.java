@@ -1,24 +1,20 @@
 package com.example.officelibrary.model;
 
+import com.example.officelibrary.model.enums.Role;
 import jakarta.persistence.*;
-import org.apache.tomcat.util.digester.Rule;
-import org.springframework.context.annotation.EnableMBeanExport;
-import org.springframework.context.annotation.Role;
-
-import java.util.HashSet;
 
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "id"))
-//    @Enumerated(EnumType.STRING)
-//    private Set<Role> roles = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type_user")
+    private Role type;
 
     @Column(name = "first_name")
     private String firstName;
@@ -28,9 +24,6 @@ public class Users {
 
     @Column(name = "birthdate")
     private String birthdate;
-
-    @Column(name = "type_user")
-    private String typeUser;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "id")
@@ -68,20 +61,20 @@ public class Users {
         this.birthdate = birthdate;
     }
 
-    public String getTypeUser() {
-        return typeUser;
-    }
-
-    public void setTypeUser(String typeuser) {
-        this.typeUser = typeuser;
-    }
-
     public Book getBook() {
         return book;
     }
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    public Role getType() {
+        return type;
+    }
+
+    public void setType(Role type) {
+        this.type = type;
     }
 
     @Override
@@ -91,9 +84,7 @@ public class Users {
                 ", firstname" + firstName + '\'' +
                 ", secondname" + secondName + '\'' +
                 ", birthdate" + birthdate + '\'' +
-                ", typeuser" + typeUser + '\'' +
+                ", typeuser" + type + '\'' +
                 '}';
     }
-//
-//    @Override
 }

@@ -5,22 +5,20 @@ import com.example.officelibrary.exception.ResourceNotFoundException;
 import com.example.officelibrary.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import com.example.officelibrary.service.AuthorService;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/office-library")
+@RequestMapping("/library")
 public class AuthorController {
     @Autowired
     AuthorService authorService;
 
-    @GetMapping("/authors")
+    @GetMapping("/author")
     public ResponseEntity<?> getAllAuthors(){
         List<Author> authors = authorService.findAll();
         return ResponseEntity.ok().body(authors);
@@ -31,5 +29,17 @@ public class AuthorController {
         throws ResourceNotFoundException {
         Optional<Author> authors = authorService.findById(authorId);
         return ResponseEntity.ok().body(authors);
+    }
+
+    @GetMapping("/author/add")
+    public String authorAdd(){
+        return "author-add";
+    }
+
+    @PostMapping("/author/add")
+    public String authorPostAdd(@RequestParam String firstName, @RequestParam String birthdate, @RequestParam String biography, Model model){
+        Author author = new Author(firstName, birthdate, biography);
+        authorService.create(author);
+        return "redirect:/library/author";
     }
 }
