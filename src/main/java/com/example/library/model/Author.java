@@ -4,6 +4,7 @@ package com.example.library.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Author {
     private String fullName;
 
     @Column(name = "birth")
-    private String birth;
+    private Date birth;
 
     @Column(name = "biography")
     private String biography;
@@ -30,7 +31,7 @@ public class Author {
     //… getters and setters
 
 
-    public Author(String fullName, String birth, String biography) {
+    public Author(String fullName, Date birth, String biography) {
         this.fullName = fullName;
         this.birth = birth;
         this.biography = biography;
@@ -55,11 +56,11 @@ public class Author {
         this.fullName = fullName;
     }
 
-    public String getBirth() {
+    public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(String birth) {
+    public void setBirth(Date birth) {
         this.birth = birth;
     }
 

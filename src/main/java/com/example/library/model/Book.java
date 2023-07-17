@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "book")
 public class Book {
@@ -17,7 +19,7 @@ public class Book {
     private String name;
 
     @Column(name = "publication")
-    private String publication;
+    private Date publication;
 
     @Column(name = "genre")
     private String genre;
@@ -32,7 +34,16 @@ public class Book {
     @JoinColumn(name="author_id", nullable=false)
     private Author author;
 
-    public Book() {}
+    public Book(String name, Date publication, String genre) {
+        this.name= name;
+        this.publication = publication;
+        this.genre = genre;
+    }
+
+    public Book() {
+    }
+
+
     //… getters and setters
 
 
@@ -42,7 +53,9 @@ public class Book {
     }
 
     public void setAuthor(Author author) {
+
         this.author = author;
+
     }
 
 
@@ -62,11 +75,11 @@ public class Book {
         this.name = name;
     }
 
-    public String getPublication() {
+    public Date getPublication() {
         return publication;
     }
 
-    public void setPublication(String publication) {
+    public void setPublication(Date publication) {
         this.publication = publication;
     }
 
@@ -74,7 +87,7 @@ public class Book {
         return genre;
     }
 
-    public void getGenre(String genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 

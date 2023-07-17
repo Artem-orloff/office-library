@@ -10,4 +10,12 @@ public class LibraryApplication {
 		SpringApplication.run(LibraryApplication.class, args);
 	}
 
+//	@Bean
+//	public CommandLineRunner test(UsersService userService) {
+//		return (args) -> {
+//			// save users for test
+//			userService.registerNewUserAccount(new UserDto("editor", "123456", Role.EDITOR, "Ivanov"));
+//		};
+//	}
+
 }
