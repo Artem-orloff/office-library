@@ -25,5 +25,8 @@ CREATE TABLE IF NOT EXISTS users
     birth VARCHAR(50) NOT NULL ,
     type VARCHAR(8)  NOT NULL ,
     book_id INTEGER ,
-    FOREIGN KEY (book_id) REFERENCES book (book_id)
+    FOREIGN KEY (book_id) REFERENCES book (book_id),
+    username varchar(100) NOT NULL ,
+    enabled varchar(100) not null,
+    password varchar(100) not null
     );

@@ -9,13 +9,12 @@
 <header th:insert="hf/header.html :: header"></header>
 <div class="container mt-5 mb-5">
   <h1>Редактирование книги</h1>
+  <input type="text" th:value="${result}">
   <div th:each="el : ${book}">
-    <h2 th:text="${result}"></h2>
     <form method="post">
-      <input type="text" th:value="${el.name}" name="name" placeholder="Введите полное имя" class="form-control">
-      <input type="text" th:value="${el.publication}" name="publication" placeholder="Введите дату публикации" class="form-control">
+      <input type="text" th:value="${el.name}" name="name" placeholder="Введите название" class="form-control">
+      <input type="text" th:value="${#dates.format(el.publication, 'dd.MM.yyyy')}" name="publication" placeholder="Введите дату публикации" class="form-control">
       <input type="text" th:value="${el.genre}" name="genre" placeholder="Введите жанр" class="form-control">
-      <textarea name="biography" placeholder="Введите биографию" class="form-control" th:text="${el.biography}"/>
       <button type="submit" class="btn btn-success">Обновить</button>
     </form>
   </div>

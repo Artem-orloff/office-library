@@ -43,11 +43,6 @@ public class Book {
     public Book() {
     }
 
-
-    //… getters and setters
-
-
-
     public Author getAuthor() {
         return author;
     }
@@ -57,7 +52,6 @@ public class Book {
         this.author = author;
 
     }
-
 
     public Long getBookId() {
         return bookId;
@@ -90,7 +84,6 @@ public class Book {
     public void setGenre(String genre) {
         this.genre = genre;
     }
-
 
     @Override
     public String toString() {
