@@ -1,9 +1,12 @@
 package com.example.library.controller;
 
+import com.example.library.model.Book;
 import com.example.library.model.User;
 import com.example.library.model.enums.Role;
+import com.example.library.service.BookService;
 import com.example.library.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,9 @@ public class UsersController {
             ThreadLocal.withInitial(() -> new SimpleDateFormat("dd.MM.yyyy"));
     @Autowired
     UsersService usersService;
+
+    @Autowired
+    BookService bookService;
 
     @GetMapping(value = "/{username}", produces = "application/json")
     public String userInfo(@PathVariable String username) {
@@ -83,16 +89,16 @@ public class UsersController {
         return "redirect:/library/user";
     }
 
-//    @GetMapping("/{user_id}/take/{book_id}")
-//    public ResponseEntity<?> takeBook(@PathVariable(value = "user_id") Long userId, @PathVariable(value = "book_id") Long bookId) {
-//
-//        User user = usersService.getById(userId);
-//        Book book = bookService.getById(bookId);
-//        if(user.getType() == Role.READER) {
-//            System.out.println("Correct");
-//        }
-//        else { System.out.println("Incorrect");}
-//        return ResponseEntity.ok().build();
-//    }
+    @GetMapping("/{user_id}/take/{book_id}")
+    public ResponseEntity<?> takeBook(@PathVariable(value = "user_id") Long userId, @PathVariable(value = "book_id") Long bookId) {
+
+        User user = usersService.getById(userId);
+        Book book = bookService.getById(bookId);
+        if(user.getType() == Role.READER) {
+            System.out.println("Correct");
+        }
+        else { System.out.println("Incorrect");}
+        return ResponseEntity.ok().build();
+    }
 
 }
