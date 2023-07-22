@@ -9,13 +9,12 @@
 <header th:insert="hf/header.html :: header"></header>
 <div class="container mt-5 mb-5">
   <h1>Редактирование пользователя</h1>
-  <input type="text" th:value="${result}">
   <div th:each="el : ${user}">
     <form method="post">
-      <input type="text" th:value="${el.fullName}" name="fullName" placeholder="Введите полное имя" class="form-control">
-      <input type="text" th:value="${#dates.format(el.birth, 'dd.MM.yyyy')}" name="birth" placeholder="Введите дату рождения" class="form-control">
-      <input type="text" th:value="${el.type}" name="type" placeholder="Введите тип пользователя" class="form-control">
-      <button type="submit" class="btn btn-success">Обновить</button>
+      <input type="text" th:value="${el.fullName}" name="fullName" placeholder="Введите полное имя" >
+      <input type="text" th:value="${#dates.format(el.birth, 'dd.MM.yyyy')}" name="birth" placeholder="Введите дату рождения">
+      <input type="text" th:value="${el.type}" name="type" placeholder="Введите тип пользователя">
+      <button type="submit" class="nav-link btn btn-outline-primary">Обновить</button>
     </form>
   </div>
 </div>

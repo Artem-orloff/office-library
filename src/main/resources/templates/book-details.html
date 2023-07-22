@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <title>Информация о книгах</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,9 +14,10 @@
     <p th:text="${#dates.format(el.publication, 'dd.MM.yyyy')}"/>
     <p th:text="${el.genre}"/>
     <p th:text="${el.author}"/>
-    <a th:href="'/library/book/' + ${el.bookId} + '/edit'" class="btn btn-warning">Редактировать</a><br><br>
-    <form th:action="'/library/book/' + ${el.bookId} + '/remove'" method="post">
-      <button class="btn btn-warning" type="submit">Удалить</button>
+    <a th:href="'/library/take/' + ${el.bookId}" class="nav-link btn btn-outline-primary">Взять книгу</a>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="'/library/book/' + ${el.bookId} + '/edit'" class="nav-link btn btn-outline-primary">Редактировать</a>
+    <form sec:authorize="hasAuthority('EDITOR')" th:action="'/library/book/' + ${el.bookId} + '/remove'" method="post">
+      <button type="submit" class="nav-link btn btn-outline-primary">Удалить</button>
     </form>
   </div>
 </div>

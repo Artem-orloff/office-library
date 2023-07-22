@@ -3,7 +3,6 @@ package com.example.library.controller;
 import com.example.library.model.Author;
 import com.example.library.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +49,8 @@ public class AuthorController {
         return "author-add";
     }
     @PostMapping("/author/add")
-    public String authorPostAdd(@RequestParam String fullName, @RequestParam String birth,@RequestParam String biography, Model model) throws ParseException {
+    public String authorPostAdd(@RequestParam String fullName, @RequestParam String birth,@RequestParam String biography,
+                                Model model) throws ParseException {
         Date birthDate = dateFormat.get().parse(birth);
         Author author = new Author(fullName, birthDate, biography);
         authorService.create(author);
@@ -66,7 +66,9 @@ public class AuthorController {
         return "author-edit";
     }
     @PostMapping("/author/{id}/edit")
-    public String authorPostUpdate(@PathVariable(value = "id") Long authorId, @RequestParam String fullName, @RequestParam String birth, @RequestParam String biography, Model model) throws ParseException {
+    public String authorPostUpdate(@PathVariable(value = "id") Long authorId, @RequestParam String fullName,
+                                   @RequestParam String birth, @RequestParam String biography, Model model)
+            throws ParseException {
         Author author = authorService.findById(authorId).orElseThrow();
         Date birthDate = dateFormat.get().parse(birth);
         author.setFullName(fullName);

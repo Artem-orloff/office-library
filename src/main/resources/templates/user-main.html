@@ -13,7 +13,7 @@
   <div th:each="el : ${users}" class="alert alert-info mt-2">
     <p th:text="${el.fullName}"/>
     <p th:text="${el.type}"/>
-    <a th:href="'/library/user/' + ${el.usersId}" class="btn btn-warning">Подробнее</a>
+    <a th:href="'/library/user/' + ${el.usersId}" class="nav-link btn btn-outline-primary">Подробнее</a>
   </div>
 </div>
 <footer th:insert="hf/footer.html :: footer"></footer>

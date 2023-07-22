@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Информация об авторе</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,9 +13,9 @@
         <p th:text="${el.fullName}"/>
         <p th:text="${#dates.format(el.birth, 'dd.MM.yyyy')}"/>
         <p th:text="${el.biography}"/>
-        <a th:href="'/library/author/' + ${el.authorId} + '/edit'" class="btn btn-warning">Редактировать</a><br><br>
-        <form th:action="'/library/author/' + ${el.authorId} + '/remove'" method="post">
-            <button class="btn btn-warning" type="submit">Удалить</button>
+        <a sec:authorize="hasAuthority('EDITOR')"th:href="'/library/author/' + ${el.authorId} + '/edit'" class="nav-link btn btn-outline-primary">Редактировать</a><br><br>
+        <form sec:authorize="hasAuthority('EDITOR')"th:action="'/library/author/' + ${el.authorId} + '/remove'" method="post">
+            <button type="submit" class="nav-link btn btn-outline-primary">Удалить</button>
         </form>
     </div>
 </div>

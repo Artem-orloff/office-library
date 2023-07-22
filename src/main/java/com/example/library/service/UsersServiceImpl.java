@@ -4,8 +4,6 @@ import com.example.library.DTO.UserDto;
 import com.example.library.exception.UsernameExistsException;
 import com.example.library.model.User;
 import com.example.library.repository.UsersRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +11,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
-    @Autowired
-    private UsersRepository usersRepository;
+
+    private final UsersRepository usersRepository;
+
     private final PasswordEncoder passwordEncoder;
+
+    public UsersServiceImpl(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
+        this.usersRepository = usersRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User findUser(String username) {
         return usersRepository.findByUsername(username);
@@ -36,6 +40,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Optional<User> findById(long user_id) { return usersRepository.findById(user_id);}
+
 
     @Override
     public User getById(Long user_id) { return  usersRepository.getById(user_id); }
@@ -77,6 +82,7 @@ public class UsersServiceImpl implements UsersService {
         user.setEnabled(true);
         user.setUsername(accountDto.getUsername());
         user.setType(accountDto.getType());
+        user.setBirth(accountDto.getBirth());
         return usersRepository.save(user);
     }
 

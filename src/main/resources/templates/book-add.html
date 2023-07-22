@@ -18,7 +18,7 @@
     <option value="">Выбор автора</option>
     <option th:each="author : ${authors}" th:value="${author.authorId}" th:text="${author.fullName}"></option>
   </select>
-  <button type="submit" class="btn btn-success">Добавить книгу</button>
+  <button type="submit" class="nav-link btn btn-outline-primary">Добавить книгу</button>
 </form>
 </div>
 <footer th:insert="hf/footer.html :: footer"></footer>

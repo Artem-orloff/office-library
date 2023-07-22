@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <title>Книги</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -10,10 +10,11 @@
 
 <div class="container mt-5">
   <h1>Книги</h1>
+  <a sec:authorize="hasAuthority('EDITOR')"th:href="'/library/book/add'" class="nav-link btn btn-outline-primary">Добавить книгу</a>
   <div th:each="el : ${books}" class="alert alert-info mt-2">
     <p th:text="${el.name}"/>
     <p th:text="${el.genre}"/>
-    <a th:href="'/library/book/' + ${el.bookId}" class="btn btn-warning">Подробнее</a>
+    <a th:href="'/library/book/' + ${el.bookId}" class="nav-link btn btn-outline-primary">Подробнее</a>
   </div>
 </div>
 <footer th:insert="hf/footer.html :: footer"></footer>

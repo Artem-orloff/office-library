@@ -51,13 +51,19 @@ public class UsersController {
 
     @GetMapping("/user/add")
     public String userAdd(Model model) {
+        model.addAttribute("books", bookService.findAll());
         return "user-add";
     }
     @PostMapping("/user/add")
-    public String userPostAdd(@RequestParam String fullName, @RequestParam String birth, @RequestParam Role type, Model model) throws ParseException {
+    public String userPostAdd(@RequestParam String fullName, @RequestParam String birth, @RequestParam Role type,
+                              @RequestParam String book, Model model) throws ParseException {
         Date birthDate = dateFormat.get().parse(birth);
-        User user = new User(fullName, birthDate, type);
-        usersService.create(user);
+        Optional<Book> bookId = bookService.findById(Long.parseLong(book));
+        if(bookId.isPresent()) {
+            User user = new User(fullName, birthDate, type);
+            user.setBook(bookId.get());
+            usersService.create(user);
+        }
         return "redirect:/library/user";
     }
 
@@ -67,16 +73,24 @@ public class UsersController {
         ArrayList<User> res = new ArrayList<>();
         user.ifPresent(res::add);
         model.addAttribute("user", res);
+        model.addAttribute("books", bookService.findAll());
         return "user-edit";
     }
     @PostMapping("/user/{id}/edit")
-    public String userPostUpdate(@PathVariable(value = "id") Long userId, @RequestParam String fullName, @RequestParam String birth, @RequestParam Role type, Model model) throws ParseException {
+    public String userPostUpdate(@PathVariable(value = "id") Long userId, @RequestParam String fullName,
+                                 @RequestParam String birth, @RequestParam Role type,@RequestParam String book,
+                                 Model model) throws ParseException {
         User user = usersService.findById(userId).orElseThrow();
         Date birthDate = dateFormat.get().parse(birth);
-        user.setFullName(fullName);
-        user.setBirth(birthDate);
-        user.setType(type);
-        usersService.create(user);
+        Optional<Book> bookId = bookService.findById(Long.parseLong(book));
+        if(bookId.isPresent())
+        {
+            user.setFullName(fullName);
+            user.setBirth(birthDate);
+            user.setType(type);
+            user.setBook(bookId.get());
+            usersService.create(user);
+        }
         model.addAttribute("user", user);
         model.addAttribute("result", "Success update");
         return "user-details";
@@ -88,17 +102,4 @@ public class UsersController {
         usersService.delete(user.getUsersId());
         return "redirect:/library/user";
     }
-
-    @GetMapping("/{user_id}/take/{book_id}")
-    public ResponseEntity<?> takeBook(@PathVariable(value = "user_id") Long userId, @PathVariable(value = "book_id") Long bookId) {
-
-        User user = usersService.getById(userId);
-        Book book = bookService.getById(bookId);
-        if(user.getType() == Role.READER) {
-            System.out.println("Correct");
-        }
-        else { System.out.println("Incorrect");}
-        return ResponseEntity.ok().build();
-    }
-
 }

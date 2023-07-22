@@ -1,10 +1,12 @@
 package com.example.library.DTO;
 
+import com.example.library.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.example.library.model.enums.Role;
+
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +17,5 @@ public class UserDto {
     private String password;
     private Role type;
     private String fullName;
-    private String birth;
+    private Date birth;
 }
