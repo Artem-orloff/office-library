@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/library")
-public class AuthorController {
+public class  AuthorController {
     private static final ThreadLocal<SimpleDateFormat> dateFormat =
             ThreadLocal.withInitial(() -> new SimpleDateFormat("dd.MM.yyyy"));
     @Autowired
@@ -29,7 +29,7 @@ public class AuthorController {
         return "author-main";
     }
 
-    //    @GetMapping("/author/{id}")
+//    @GetMapping("/author/{id}")
 //    public ResponseEntity<Optional<Author>> getAuthorById(@PathVariable(value = "id") Long authorId)
 //            throws ResourceNotFoundException {
 //        Optional<Author> authors = authorService.findById(authorId);
@@ -37,7 +37,7 @@ public class AuthorController {
 //    }
     @GetMapping("/author/{id}")
     public String getAuthorById(@PathVariable(value = "id") Long authorId, Model model) {
-        Optional<Author> author = authorService.findById(authorId);
+       Optional<Author> author = authorService.findById(authorId);
         ArrayList<Author> res = new ArrayList<>();
         author.ifPresent(res::add);
         model.addAttribute("author", res);

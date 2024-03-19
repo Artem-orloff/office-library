@@ -1,12 +1,12 @@
 package com.example.library.controller;
 
+import com.example.library.model.Author;
 import com.example.library.model.Book;
 import com.example.library.model.User;
 import com.example.library.model.enums.Role;
 import com.example.library.service.BookService;
 import com.example.library.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -67,6 +67,12 @@ public class UsersController {
         return "redirect:/library/user";
     }
 
+    @GetMapping("/")
+    public String getUserBook(Model model) {
+        model.addAttribute("user", usersService.findAll());
+        return "hf/header";
+    }
+
     @GetMapping("/user/{id}/edit")
     public String getUserEdit(@PathVariable(value = "id") Long userId, Model model) {
         Optional<User> user = usersService.findById(userId);
@@ -102,4 +108,7 @@ public class UsersController {
         usersService.delete(user.getUsersId());
         return "redirect:/library/user";
     }
+
+
+
 }

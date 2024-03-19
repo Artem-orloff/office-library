@@ -25,8 +25,11 @@ public class Book {
     private String genre;
 
 
-//    @OneToOne(mappedBy = "book")
-//    private User user;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
+
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -46,6 +49,14 @@ public class Book {
 
     //… getters and setters
 
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Author getAuthor() {
         return author;
@@ -100,4 +111,5 @@ public class Book {
                 ", Genre='" + genre + '\'' +
                 '}';
     }
+
 }

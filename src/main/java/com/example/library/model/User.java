@@ -34,8 +34,7 @@ public class User implements UserDetails {
     private Role type;
     private Boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private Book book;
 
     public User(String fullName, Date birth, Role type) {
@@ -47,6 +46,7 @@ public class User implements UserDetails {
     public User() {
 
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
