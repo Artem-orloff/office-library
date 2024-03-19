@@ -11,14 +11,17 @@
     <p th:text="${el.name}"/>
     <p th:text="${#dates.format(el.publication, 'dd.MM.yyyy')}"/>
     <p th:text="${el.genre}"/><br><br>
-    <p>Author: </p>
+    <p>Автор: </p>
       <p th:text="${el.author.fullName}"/>
     <form  action="#" th:action="'/library/book/'+${el.bookId}+'/addBook'" method="post">
       <button name="action" th:value="userAddBook" type="submit" class="btn btn-success">Взять книгу</button>
     </form>
+    <form  action="#" th:action="'/library/book/'+${el.bookId}+'/returnBook'" method="post">
+      <button name="action" th:value="userAddBook" type="submit" class="btn btn-success">Вернуть книгу</button>
+    </form>
 <!--    <p>Reader: </p>-->
 <!--      <p th:text="${el.user.fullName}"></p>-->
-<!--    <a sec:authorize="hasAuthority('EDITOR')" th:href="'/library/book/' + ${el.bookId} + '/edit'" class="btn btn-warning">Редактировать</a><br><br>-->
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="'/library/book/' + ${el.bookId} + '/edit'" class="btn btn-warning">Редактировать</a><br><br>
 <!--    <form sec:authorize="hasAuthority('EDITOR')" th:action="'/library/book/' + ${el.bookId} + '/remove'" method="post">-->
       <button class="btn btn-warning" type="submit">Удалить</button>
     </form>

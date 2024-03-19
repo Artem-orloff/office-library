@@ -55,6 +55,15 @@ public class BookController {
         return "redirect:/library/book";
     }
 
+//    @PostMapping("/book/{id}/returnBook")
+//    public String userReturnBook(Model model, Principal principal, @RequestParam String action,@PathVariable(value = "id") Long bookId) {
+//        Optional<Book> optBook = bookService.findById(bookId);
+//        Book book = optBook.get();
+//        book.setUserNULL();
+//        bookService.create(book);
+//        return "redirect:/library/book";
+//    }
+
     //    @PostMapping("/book")
 //    public String userAddBook(@RequestParam String book, Model model){
 //        Optional<Book> bookId = bookService.findById(Long.parseLong(book));

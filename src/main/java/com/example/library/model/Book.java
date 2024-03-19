@@ -112,4 +112,7 @@ public class Book {
                 '}';
     }
 
+//    public void setUserNULL() {
+//        this.user = null;
+//    }
 }
