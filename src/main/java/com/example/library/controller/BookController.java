@@ -6,6 +6,7 @@ import com.example.library.model.User;
 import com.example.library.service.AuthorService;
 import com.example.library.service.BookService;
 import com.example.library.service.UsersService;
+import org.hibernate.engine.internal.Nullability;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/library")
@@ -42,6 +40,12 @@ public class BookController {
         List<Book> books = bookService.findAll();
         model.addAttribute("users", usersService.findAll());
         model.addAttribute("books", books);
+        books.sort(new Comparator<Book>() {
+            @Override
+            public int compare(Book s1, Book s2) {
+                return CharSequence.compare(s1.getName(), s2.getName());
+            }
+        });
         return "book-main";
     }
 
@@ -158,15 +162,22 @@ public class BookController {
 
     @PostMapping("/take-book/{bookId}")
     public ResponseEntity<String> takeBook(@PathVariable Long bookId) {
-        // Получите id пользователя, который выполнил вход, например, из вашего контекста безопасности
         String username = authentication.getName();
         User userId = usersService.findUser(username);// ... ваш способ получения id пользователя;
+        //здесь проверку на занятость книги
+        if (userId.getBook() == null) {
 
-        // Ищем книгу по id
+        }
+        else{
+
+        }
         Optional<Book> optionalBook = bookService.findById(bookId);
 
         if (optionalBook.isPresent()) {
-            // Устанавливаем userId в книгу и сохраняем в базе данных
+            //здесь проверка на свободность книги
+//            if (){
+//
+//            }
             Book book = optionalBook.get();
             book.setUser(userId);
             bookService.create(book);
