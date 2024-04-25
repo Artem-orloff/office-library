@@ -163,27 +163,26 @@ public class BookController {
     @PostMapping("/take-book/{bookId}")
     public ResponseEntity<String> takeBook(@PathVariable Long bookId) {
         String username = authentication.getName();
-        User userId = usersService.findUser(username);// ... ваш способ получения id пользователя;
-        //здесь проверку на занятость книги
+        User userId = usersService.findUser(username);
         if (userId.getBook() == null) {
+            Optional<Book> optionalBook = bookService.findById(bookId);
 
+            if (optionalBook.isPresent()) {
+                Book book = optionalBook.get();
+
+                if (book.getUser() != null){
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("книга занята");
+                }
+
+                book.setUser(userId);
+                bookService.create(book);
+
+                return ResponseEntity.ok("Книга успешно взята");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Книга не найдена");
         }
-        else{
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("у вас уже есть книга");
 
-        }
-        Optional<Book> optionalBook = bookService.findById(bookId);
-
-        if (optionalBook.isPresent()) {
-            //здесь проверка на свободность книги
-//            if (){
-//
-//            }
-            Book book = optionalBook.get();
-            book.setUser(userId);
-            bookService.create(book);
-
-            return ResponseEntity.ok("Книга успешно взята");
-        } else
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Книга не найдена");
+//        return "redirect:/library/book";
     }
 }
