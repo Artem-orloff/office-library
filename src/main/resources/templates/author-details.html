@@ -15,6 +15,7 @@
     <form sec:authorize="hasAuthority('EDITOR')" th:action="'/library/author/' + ${el.authorId} + '/remove'" method="post">
       <button class="btn btn-warning" type="submit">Удалить</button>
     </form>
+    <a class="btn btn-warning" href="/library/author">Назад</a>
   </div>
 </div>
 <footer th:insert="hf/footer.html :: footer"></footer>

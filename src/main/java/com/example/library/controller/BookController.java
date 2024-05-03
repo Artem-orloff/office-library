@@ -6,7 +6,6 @@ import com.example.library.model.User;
 import com.example.library.service.AuthorService;
 import com.example.library.service.BookService;
 import com.example.library.service.UsersService;
-import org.hibernate.engine.internal.Nullability;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,57 +35,26 @@ public class BookController {
     UsersService usersService;
 
     @GetMapping("/book")
-    public String getAllBooks(Model model) {
+    public String getAllBooks(Model model, Principal principal, String keyword) {
+        User user = usersService.findUser(principal.getName());
         List<Book> books = bookService.findAll();
-        model.addAttribute("users", usersService.findAll());
-        model.addAttribute("books", books);
+        model.addAttribute("users", user);
         books.sort(new Comparator<Book>() {
             @Override
             public int compare(Book s1, Book s2) {
                 return CharSequence.compare(s1.getName(), s2.getName());
             }
         });
+
+        if(keyword != null) {
+            model.addAttribute("books", bookService.findbyKeyword(keyword));
+        }
+        else {
+            model.addAttribute("books", books);
+        }
         return "book-main";
     }
 
-    @PostMapping("/book/{id}/addBook")
-    public String userAddBook(Model model, Principal principal, @RequestParam String action,@PathVariable(value = "id") Long bookId) {
-            User user = usersService.findUser(principal.getName());
-            Optional<Book> optBook = bookService.findById(bookId);
-            Book book = optBook.get();
-            book.setUser(user);
-            bookService.create(book);
-        return "redirect:/library/book";
-    }
-
-    @PostMapping("/book/{id}/returnBook")
-    public String userReturnBook(Model model, Principal principal, @RequestParam String action,@PathVariable(value = "id") Long bookId) {
-        Optional<Book> optBook = bookService.findById(bookId);
-        Book book = optBook.get();
-        book.setUserNULL();
-        bookService.create(book);
-        return "redirect:/library/book";
-    }
-
-    //    @PostMapping("/book")
-//    public String userAddBook(@RequestParam String book, Model model){
-//        Optional<Book> bookId = bookService.findById(Long.parseLong(book));
-//        if(bookId.isPresent()) {
-//            User user = new User();
-//            user.setBook(bookId.get());
-//            usersService.create(user);
-//        }
-//        return "redirect:/library/book";
-//    }
-//    @GetMapping("/{user_id}/take/{book_id}")
-//    public String takeBook(@PathVariable(value = "user_id") Long userId, @PathVariable(value = "book_id") Long bookId) {
-//
-//        User user = usersService.getById(userId);
-//        Book book = bookService.getById(bookId);
-//        user.setBook(book);
-//        usersService.create(user);
-//        return "book-main";
-//    }
     @GetMapping("/book/{id}")
     public String getABookById(@PathVariable(value = "id") Long bookId, Model model) {
         Optional<Book> book = bookService.findById(bookId);
@@ -94,6 +62,27 @@ public class BookController {
         book.ifPresent(res::add);
         model.addAttribute("book", res);
         return "book-details";
+    }
+
+    @PostMapping("/book/{id}/addBook")
+    public String userAddBook(Model model, Principal principal, @RequestParam String action,
+                              @PathVariable(value = "id") Long bookId) {
+        User user = usersService.findUser(principal.getName());
+        Optional<Book> optBook = bookService.findById(bookId);
+        Book book = optBook.get();
+        book.setUser(user);
+        bookService.create(book);
+        return "redirect:/library/book";
+    }
+
+    @PostMapping("/book/{id}/returnBook")
+    public String userReturnBook(Model model, Principal principal, @RequestParam String action,
+                                 @PathVariable(value = "id") Long bookId) {
+        Optional<Book> optBook = bookService.findById(bookId);
+        Book book = optBook.get();
+        book.setUserNULL();
+        bookService.create(book);
+        return "redirect:/library/book";
     }
 
 
@@ -151,38 +140,5 @@ public class BookController {
         Book book = bookService.findById(bookId).orElseThrow();
         bookService.delete(book.getBookId());
         return "redirect:/library/book";
-    }
-
-
-    @GetMapping("/take-book/{bookId}")
-    public ResponseEntity<String> getTakeBookPage(@PathVariable Long bookId) {
-        // Возможно, здесь вам нужно будет вернуть шаблон Thymeleaf для страницы с информацией о взятии книги
-        return ResponseEntity.ok("Страница взятия книги");
-    }
-
-    @PostMapping("/take-book/{bookId}")
-    public ResponseEntity<String> takeBook(@PathVariable Long bookId) {
-        String username = authentication.getName();
-        User userId = usersService.findUser(username);
-        if (userId.getBook() == null) {
-            Optional<Book> optionalBook = bookService.findById(bookId);
-
-            if (optionalBook.isPresent()) {
-                Book book = optionalBook.get();
-
-                if (book.getUser() != null){
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("книга занята");
-                }
-
-                book.setUser(userId);
-                bookService.create(book);
-
-                return ResponseEntity.ok("Книга успешно взята");
-            }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Книга не найдена");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("у вас уже есть книга");
-
-//        return "redirect:/library/book";
     }
 }

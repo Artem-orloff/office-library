@@ -22,22 +22,24 @@ public class  AuthorController {
     @Autowired
     AuthorService authorService;
 
+
+
     @GetMapping("/author")
-    public String getAllAuthors(Model model) {
-        List<Author> authors = authorService.findAll();
-        model.addAttribute("authors", authors);
+    public String getAllAuthors(Model model, String keyword) {
+
+
+        if(keyword != null) {
+            model.addAttribute("authors", authorService.findbyKeyword(keyword));
+        }
+        else {
+            model.addAttribute("authors", authorService.findAll());
+        }
         return "author-main";
     }
 
-//    @GetMapping("/author/{id}")
-//    public ResponseEntity<Optional<Author>> getAuthorById(@PathVariable(value = "id") Long authorId)
-//            throws ResourceNotFoundException {
-//        Optional<Author> authors = authorService.findById(authorId);
-//        return ResponseEntity.ok().body(authors);
-//    }
     @GetMapping("/author/{id}")
     public String getAuthorById(@PathVariable(value = "id") Long authorId, Model model) {
-       Optional<Author> author = authorService.findById(authorId);
+        Optional<Author> author = authorService.findById(authorId);
         ArrayList<Author> res = new ArrayList<>();
         author.ifPresent(res::add);
         model.addAttribute("author", res);
@@ -86,7 +88,5 @@ public class  AuthorController {
         authorService.delete(author.getAuthorId());
         return "redirect:/library/author";
     }
-
-
 
 }

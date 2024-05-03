@@ -47,9 +47,6 @@ public class Book {
     }
 
 
-    //… getters and setters
-
-
     public User getUser() {
         return user;
     }
@@ -101,6 +98,10 @@ public class Book {
         this.genre = genre;
     }
 
+    public void setUserNULL() {
+        this.user = null;
+    }
+
 
     @Override
     public String toString() {
@@ -112,7 +113,4 @@ public class Book {
                 '}';
     }
 
-    public void setUserNULL() {
-        this.user = null;
-    }
 }
