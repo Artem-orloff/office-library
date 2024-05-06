@@ -63,7 +63,9 @@ public class UsersController {
         Optional<Book> bookId = bookService.findById(Long.parseLong(book));
         if(bookId.isPresent()) {
             User user = new User(fullName, birthDate, type);
-            user.setBook(bookId.get());
+            var books = user.getBook();
+            books.add(bookId.get());
+            user.setBook(books);
             usersService.create(user);
         }
         return "redirect:/library/user";
@@ -96,7 +98,9 @@ public class UsersController {
             user.setFullName(fullName);
             user.setBirth(birthDate);
             user.setType(type);
-            user.setBook(bookId.get());
+            var books = user.getBook();
+            books.add(bookId.get());
+            user.setBook(books);
             usersService.create(user);
         }
         model.addAttribute("user", user);
