@@ -1,4 +1,4 @@
-package com.example.library.dto;
+package com.example.library.DTO;
 
 import com.example.library.model.enums.Role;
 import lombok.AllArgsConstructor;

@@ -27,10 +27,6 @@ public class Author {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private List<Book> books = new ArrayList<>();
 
-
-    //… getters and setters
-
-
     public Author(String fullName, Date birth, String biography) {
         this.fullName = fullName;
         this.birth = birth;

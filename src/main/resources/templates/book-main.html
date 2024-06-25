@@ -11,8 +11,7 @@
 <div class="container mt-5">
     <h1>Книги</h1>
     <div sec:authorize="isAuthenticated()">
-        Authenticated as <span sec:authentication="name"></span>
-<!--        <p th:text="${#authentication}"/>-->
+        Авторизирован как <span sec:authentication="name"></span>
     </div>
     <form th:action="@{/library/book}" method="get">
         <input id="txtSearch" type="text" name="keyword">
@@ -31,12 +30,7 @@
         <form th:each="user : ${users}" th:if="${user} == ${book.user}" action="#" th:action="'/library/book/'+${book.bookId}+'/returnBook'" method="post">
             <button name="action" th:value="userAddBook" type="submit" class="btn btn-success">Вернуть книгу</button>
         </form>
-        <!--        <button th:attr="data-book-id=${book.bookId}" onclick="takeBook(this.getAttribute('data-book-id'))">Взять книгу</button>-->
-    </div>
-
-    <!--        <a th:if="${book.user == null}" th:href="${book.user.usersId} + '/take/' + ${book.bookId}" class="btn btn-warning">Взять книгу</a>-->
-
-
+        </div>
 </div>
 <footer th:insert="hf/footer.html :: footer"></footer>
 </body>

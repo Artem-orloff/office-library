@@ -1,6 +1,5 @@
 package com.example.library.service;
 
-import com.example.library.model.Author;
 import com.example.library.model.Book;
 import com.example.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;

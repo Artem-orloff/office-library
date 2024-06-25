@@ -13,7 +13,7 @@
     <h1>Авторы</h1>
     <form th:action="@{/library/author}" method="get">
         <input id="txtSearch" type="text" name="keyword">
-        <button type="submit">Find</button>
+        <button type="submit">Поиск</button>
     </form>
     <div sec:authorize="hasAuthority('EDITOR')">
         <a th:href="'/library/author/add'" class="btn btn-warning">Добавить автора</a>

@@ -13,8 +13,6 @@
     <p th:text="${el.genre}"/><br><br>
     <p>Author: </p>
     <p th:text="${el.author.fullName}"/>
-    <!--    <p>Reader: </p>-->
-    <!--      <p th:text="${el.user.fullName}"></p>-->
     <a sec:authorize="hasAuthority('EDITOR')" th:href="'/library/book/' + ${el.bookId} + '/edit'" class="btn btn-warning">Редактировать</a><br><br>
     <form sec:authorize="hasAuthority('EDITOR')" th:action="'/library/book/' + ${el.bookId} + '/remove'" method="post">
         <button class="btn btn-warning" type="submit">Удалить</button>

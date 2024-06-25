@@ -1,6 +1,6 @@
 package com.example.library.service;
 
-import com.example.library.dto.UserDto;
+import com.example.library.DTO.UserDto;
 import com.example.library.exception.UsernameExistsException;
 import com.example.library.model.User;
 import com.example.library.repository.UsersRepository;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-//@RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
 
@@ -73,8 +72,6 @@ public class UsersServiceImpl implements UsersService {
         User userExist = usersRepository.findByUsername(accountDto.getUsername());
         if (userExist != null) {
             return null;
-//            throw new UsernameExistsException(
-//                    "There is an account with that username:" + accountDto.getUsername());
         }
         User user = new User();
         user.setFullName(accountDto.getFullName());

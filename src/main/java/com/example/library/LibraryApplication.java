@@ -1,6 +1,6 @@
 package com.example.library;
 
-import com.example.library.dto.UserDto;
+import com.example.library.DTO.UserDto;
 import com.example.library.model.enums.Role;
 import com.example.library.service.UsersService;
 import org.springframework.boot.CommandLineRunner;

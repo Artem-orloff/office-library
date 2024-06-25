@@ -9,9 +9,9 @@
     <h1>Добавление книги</h1>
 </div>
 <form action="/library/book/add" method="post">
-    <input type="text" name="name" placeholder="Введите название" class="form-control">
-    <input type="text" name="publication" placeholder="Введите дату публикации" class="form-control">
-    <input type="text" name="genre" placeholder="Введите жанр" class="form-control">
+    <input type="text" name="name" placeholder="Название" class="form-control">
+    <input type="text" name="publication" placeholder="Дата публикации в формате гггг.мм.дд" class="form-control">
+    <input type="text" name="genre" placeholder="Жанр" class="form-control">
     <select id="author" name="author">
         <option value="">Выбор автора</option>
         <option th:each="author : ${authors}" th:value="${author.authorId}" th:text="${author.fullName}"></option>
