@@ -11,11 +11,9 @@ public interface UsersService {
     User findUser(String username);
     void create(User user);
     List<User> findAll();
-    Optional<User> findById(long user_id);
-    User getById(Long user_id);
-    User read(long user_id);
-    boolean update(User user, long user_id);
-    boolean delete(long user_id);
+    Optional<User> findById(long id);
+    boolean update(User user, long id);
+    boolean delete(long id);
     User registerNewUserAccount(UserDto accountDto) throws UsernameExistsException;
 
 }

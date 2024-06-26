@@ -11,9 +11,9 @@ import java.util.Date;
 @Table(name = "book")
 public class Book {
     @Id
-    @Column(name = "book_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookId;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -27,7 +27,7 @@ public class Book {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
 
@@ -66,12 +66,12 @@ public class Book {
     }
 
 
-    public Long getBookId() {
-        return bookId;
+    public Long getId() {
+        return id;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -106,7 +106,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "bookId=" + bookId +
+                "id=" + id +
                 ", Name='" + name + '\'' +
                 ", Publication='" + publication + '\'' +
                 ", Genre='" + genre + '\'' +
