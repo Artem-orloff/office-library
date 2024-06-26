@@ -1,0 +1,15 @@
+server:
+    port: 8081
+spring:
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        password: 8523
+        url: jdbc:postgresql://localhost:5432/library
+        username: postgres
+    jpa:
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    sql:
+        init:
+            mode: always
+            schema-locations: classpath*:database/initDB.sql
