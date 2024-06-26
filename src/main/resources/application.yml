@@ -9,7 +9,3 @@ spring:
     jpa:
         database: postgresql
         database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-    sql:
-        init:
-            mode: always
-            schema-locations: classpath*:database/initDB.sql

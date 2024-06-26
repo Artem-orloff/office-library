@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="hf/head.html :: head">
+<head th:replace="hf/head.html :: head">
     <title th:text="${title}"/>
 </head>
 <body>
-<header th:insert="hf/header.html :: header"></header>
+<header th:replace="hf/header.html :: header"></header>
 
 <main>
     <div>
@@ -15,10 +15,6 @@
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Офисная библиотека</h1>
                 <p class="lead text-body-secondary">О нашей библиотеке</p>
-                <p>
-                    <a href="#" class="btn btn-primary my-2">Пример</a>
-                    <a href="#" class="btn btn-secondary my-2">Пример</a>
-                </p>
             </div>
         </div>
     </section>
@@ -33,10 +29,7 @@
                         <div class="card-body">
                             <p class="card-text">Книга 1</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Посмотреть</button>
-                                </div>
-                                <small class="text-body-secondary">1,5 часа</small>
+                                <small class="text-body-secondary">Время прочтения 1,5 часа</small>
                             </div>
                         </div>
                     </div>
@@ -47,10 +40,7 @@
                         <div class="card-body">
                             <p class="card-text">Книга 2</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Посмотреть</button>
-                                </div>
-                                <small class="text-body-secondary">1,5 часа</small>
+                                <small class="text-body-secondary">Время прочтения 1,5 часа</small>
                             </div>
                         </div>
                     </div>
@@ -61,10 +51,7 @@
                         <div class="card-body">
                             <p class="card-text">Книга 3</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Посмотреть</button>
-                                </div>
-                                <small class="text-body-secondary">1,5 часа</small>
+                                <small class="text-body-secondary">Время прочтения 1,5 часа</small>
                             </div>
                         </div>
                     </div>
@@ -73,6 +60,6 @@
         </div>
     </div>
 </main>
-<footer th:insert="hf/footer.html :: footer"></footer>
+<footer th:replace="hf/footer.html :: footer"></footer>
 </body>
 </html>

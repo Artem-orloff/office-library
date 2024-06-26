@@ -27,6 +27,9 @@ public class Author {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private List<Book> books = new ArrayList<>();
 
+    public List<Book> getBooks(){
+        return books;
+    }
 
 
 
